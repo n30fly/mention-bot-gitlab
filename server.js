@@ -81,6 +81,7 @@ app.post('/', function(req, res) {
     },function(error, response, body){
         if (error || response.statusCode != 200) {
             console.log('Error getting merge request diff: ' + error);
+            console.log(body);
             return res.end();
         }
         
