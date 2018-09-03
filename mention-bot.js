@@ -305,7 +305,7 @@ function getBlame(url){
             page.evaluate(function () {
                 var authors = [];
                 $('.commit-author-link').each(function () {
-                    var author = $(this).text();
+                    var author = $(this).attr('href').substring(1);
                     if(authors.indexOf(author) == -1){
                         authors.push(author); 
                     }
