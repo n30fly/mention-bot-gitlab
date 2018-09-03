@@ -23,7 +23,7 @@
     "jest-cli": "^0.7.1",
     "node-phantom-simple": "^2.2.0",
     "npm": "^3.5.1",
-    "phantomjs": "^1.9.19",
+    "phantomjs": "*",
     "request": "^2.67.0"
   }
 }

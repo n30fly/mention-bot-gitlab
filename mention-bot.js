@@ -284,7 +284,7 @@ function getBlame(url){
            
         var steps = [
           function() {
-            page.open(process.env.GITLAB_URL + '/users/signin');
+            page.open(process.env.GITLAB_URL + '/users/sign_in');
           },
           function() {
             //Enter Credentials by passing them into evaluate
@@ -300,12 +300,10 @@ function getBlame(url){
             });
           },
           function() {
-               page.open(url);
-          },
-          function() {
+               page.open(url, function() {
+
             page.evaluate(function () {
                 var authors = [];
-
                 $('.commit-author-link').each(function () {
                     var author = $(this).text();
                     if(authors.indexOf(author) == -1){
@@ -317,6 +315,7 @@ function getBlame(url){
               }, function (err,result) {
                 resolve(result);
               });
+            });
           }
         ];
         

@@ -45,7 +45,7 @@ function buildMentionSentence(reviewers) {
 
 function defaultMessageGenerator(reviewers) {
   return util.format(
-    'By analyzing the blame information on this pull request' +
+    'By analyzing the blame information on this merge request' +
      ', we identified %s to be%s potential reviewer%s',
      buildMentionSentence(reviewers),
      reviewers.length > 1 ? '' : ' a',
@@ -102,17 +102,18 @@ app.post('/', function(req, res) {
           }
         
           request.post({
-                url : process.env.GITLAB_URL + '/api/v3/projects/' + data.object_attributes.target_project_id + '/merge_request/' + data.object_attributes.id + '/comments',
+                url : process.env.GITLAB_URL + '/api/v4/projects/' + data.object_attributes.target_project_id + '/merge_requests/' + data.object_attributes.id + '/notes',
                 body: JSON.stringify({
-                    note : messageGenerator(
+                    body : messageGenerator(
                       reviewers,
                       buildMentionSentence,
                       defaultMessageGenerator)
                     }),
                 headers : {
+                    'content-type' : 'application/json',
                     'PRIVATE-TOKEN' : process.env.GITLAB_TOKEN
                 }
-            },function(){
+            },function(error, response, body){
               if (error || response.statusCode != 200) {
                     console.log('Error commenting on merge request: ' + body);
               }
