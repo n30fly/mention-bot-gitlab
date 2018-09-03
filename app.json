@@ -11,15 +11,15 @@
     },
     "GITLAB_TOKEN": {
         "description": "Gitlab Token",
-        "required": false,
+        "required": true
     },
     "GITLAB_USER": {
       "description": "If you want mention-bot to work with private repos, you need to add your gitlab login",
-      "required": false
+      "required": true
     },
     "GITLAB_PASSWORD": {
       "description": "Password for Gitlab account.",
-      "required": false
+      "required": true
     }
   }
 }
